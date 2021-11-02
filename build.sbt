@@ -1,4 +1,4 @@
-name := "LogFileGenerator"
+name := "AwsLambdaUsinggRPC"
 
 version := "0.1"
 
@@ -10,10 +10,17 @@ val typesafeConfigVersion = "1.4.1"
 val apacheCommonIOVersion = "2.11.0"
 val scalacticVersion = "3.2.9"
 val generexVersion = "1.0.2"
+val awsVersion = "1.12.89"
+val grpcVersion = "1.41.0"
 
 resolvers += Resolver.jcenterRepo
 
 libraryDependencies ++= Seq(
+  "io.grpc" % "grpc-netty" % grpcVersion,
+  "com.amazonaws" % "aws-java-sdk" % awsVersion,
+  "com.amazonaws" % "aws-java-sdk-s3" % awsVersion,
+  "junit" % "junit" % "4.13.2",
+  "org.scalatestplus" %% "mockito-3-4" % "3.2.10.0" % "test",
   "ch.qos.logback" % "logback-core" % logbackVersion,
   "ch.qos.logback" % "logback-classic" % logbackVersion,
   "org.slf4j" % "slf4j-api" % sfl4sVersion,
