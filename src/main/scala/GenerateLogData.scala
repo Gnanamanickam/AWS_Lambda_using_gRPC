@@ -45,7 +45,7 @@ object GenerateLogData:
 
   val bucketName: String = config.getString("randomLogGenerator.aws_s3.bucketName")
   val s3fileName: String = config.getString("randomLogGenerator.aws_s3.s3fileName")
-  val localFileName: String = "log/LogFileGenerator.2021-10-27.log"
+  val localFileName: String = config.getString("randomLogGenerator.aws_s3.localfileName")
 
   val s3: AmazonS3 = AmazonS3ClientBuilder.standard
     .withRegion(Regions.US_EAST_1) // The first region to try the request against
