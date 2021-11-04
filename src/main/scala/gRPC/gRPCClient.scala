@@ -11,6 +11,8 @@ import com.typesafe.config.ConfigFactory
 object gRPCClient {
 
   val port = ConfigFactory.load().getInt("port")
+  val inputTime = ConfigFactory.load().getString("inputTime")
+  val inputDifferentialTime = ConfigFactory.load().getString("inputDifferentialTime")
 
   def apply(host: String, port: Int): gRPCClient = {
 
@@ -22,7 +24,7 @@ object gRPCClient {
   def main(args: Array[String]): Unit = {
     val client = gRPCClient("localhost", port)
     try {
-      val output = args.headOption.getOrElse("19:24:15,06:00:00")
+      val output = args.headOption.getOrElse(inputTime + "," + inputDifferentialTime)
       client.response(output)
     } finally {
       client.shutdown()

@@ -1,0 +1,1 @@
+GET     /logAPI                                 Rest.restClient.logAPI()

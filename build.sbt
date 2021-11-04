@@ -19,6 +19,9 @@ Compile / PB.targets := Seq(
   scalapb.gen() -> (Compile / sourceManaged).value / "scalapb"
 )
 
+//lazy val root = (project in file("."))
+//  .enablePlugins(PlayScala)
+
 resolvers += Resolver.jcenterRepo
 
 libraryDependencies ++= Seq(
@@ -30,6 +33,10 @@ libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-java-sdk-s3" % awsVersion,
   "com.lightbend.akka" %% "akka-stream-alpakka-awslambda" % "3.0.3",
   "com.typesafe.akka" %% "akka-stream" % AkkaVersion,
+  "com.typesafe.play" %% "play-json" % "2.8.1",
+  "org.julienrf" %% "play-json-derived-codecs" % "7.0.0",
+  "com.typesafe.play" %% "play-slick" % "5.0.0",
+  "com.typesafe.play" %% "play-slick-evolutions" % "5.0.0",
   "org.json" % "json" % "20090211",
   "junit" % "junit" % "4.13.2",
   "javax.xml.bind" % "jaxb-api" % "2.3.0",
@@ -43,6 +50,7 @@ libraryDependencies ++= Seq(
   "org.scalactic" %% "scalactic" % scalacticVersion,
   "org.scalatest" %% "scalatest" % scalacticVersion % Test,
   "org.scalatest" %% "scalatest-featurespec" % scalacticVersion % Test,
+  "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % "test",
   "com.typesafe" % "config" % typesafeConfigVersion,
   "com.github.mifmif" % "generex" % generexVersion
 )
