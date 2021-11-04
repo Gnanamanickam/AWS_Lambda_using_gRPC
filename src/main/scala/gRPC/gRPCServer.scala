@@ -60,10 +60,10 @@ class gRPCServer(executionContext: ExecutionContext) { self =>
       val inputDifferentialTime = input(1)
 
       //Call Lambda API Gateway
-      val responseAWS = scala.io.Source.fromURL("https://ff3r527t1b.execute-api.us-east-1.amazonaws.com/logFileAPITest?inputTime="+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
+      val responseAWS = scala.io.Source.fromURL("https://rjsduxe26m.execute-api.us-east-1.amazonaws.com/Prod/hello?inputTime="+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
       val result = responseAWS.mkString
       val json = result.parseJson.asJsObject
-      val reply = logReply(message = json.fields("returnValue").toString())
+      val reply = logReply(message = json.fields("isPresent").toString())
       responseAWS.close()
       Future.successful(reply)
     }
