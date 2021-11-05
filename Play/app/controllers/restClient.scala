@@ -18,6 +18,7 @@ class restClient @Inject()(val controllerComponents: ControllerComponents)
 
   val inputTime = ConfigFactory.load().getString("inputTime")
   val inputDifferentialTime = ConfigFactory.load().getString("inputDifferentialTime")
+  val APIGateway = ConfigFactory.load().getString("APIGateway")
 
   private val logger = Logger(getClass)
 
@@ -32,7 +33,7 @@ class restClient @Inject()(val controllerComponents: ControllerComponents)
       logger.trace("Inside logAPI: ")
 
       //Call Lambda API Gateway
-      val responseAWS = scala.io.Source.fromURL("https://rjsduxe26m.execute-api.us-east-1.amazonaws.com/Prod/hello?inputTime="+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
+      val responseAWS = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
       val result = responseAWS.mkString
       responseAWS.close()
       Ok(Json.toJson(result))

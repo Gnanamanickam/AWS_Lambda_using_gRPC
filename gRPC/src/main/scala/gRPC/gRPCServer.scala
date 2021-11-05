@@ -9,6 +9,7 @@ import java.util.logging.{Level, Logger}
 import com.logfile.proto.logfile.{GreeterGrpc, logReply, logRequest}
 import com.logfile.proto.logfile.GreeterGrpc.GreeterBlockingStub
 import com.typesafe.config.ConfigFactory
+import gRPC.gRPCServer.APIGateway
 import io.grpc.{ManagedChannel, ManagedChannelBuilder, StatusRuntimeException}
 import scalapb.options.ScalapbProto.message
 
@@ -18,6 +19,7 @@ object gRPCServer {
 
   private val logger = Logger.getLogger(classOf[gRPCServer].getName)
   val port = ConfigFactory.load().getInt("port")
+  val APIGateway = ConfigFactory.load().getString("APIGateway")
 
   def main(args: Array[String]): Unit = {
     val server = new gRPCServer(ExecutionContext.global)
@@ -60,7 +62,7 @@ class gRPCServer(executionContext: ExecutionContext) { self =>
       val inputDifferentialTime = input(1)
 
       //Call Lambda API Gateway
-      val responseAWS = scala.io.Source.fromURL("https://rjsduxe26m.execute-api.us-east-1.amazonaws.com/Prod/hello?inputTime="+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
+      val responseAWS = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
       val result = responseAWS.mkString
       val json = result.parseJson.asJsObject
       val reply = logReply(message = json.fields("isPresent").toString())
