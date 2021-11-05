@@ -39,6 +39,7 @@ object gRPCServer {
 
 class gRPCServer(executionContext: ExecutionContext) { self =>
 
+  // To start the server on the port
   val server: Server = ServerBuilder.forPort(gRPCServer.port).addService(GreeterGrpc.bindService(new GreeterImpl, executionContext)).build.start
 
   private def start(): Unit = {
