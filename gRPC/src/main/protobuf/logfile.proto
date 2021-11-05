@@ -8,12 +8,12 @@ service Greeter {
   rpc SayHello (logRequest) returns (logReply) {}
 }
 
-// The request message containing the user's name.
+// The request message containing the user's inputTime and Differential time.
 message logRequest {
   string name = 1;
 }
 
-// The response message containing the greetings
+// The response message containing the output
 message logReply {
   string message = 1;
 }

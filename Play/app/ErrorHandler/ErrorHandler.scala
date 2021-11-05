@@ -11,6 +11,7 @@ import play.api.Logger
 
 import scala.concurrent._
 
+// Error handler code to handle the error in the API call in controller
 class ErrorHandler(environment: Environment,
                    configuration: Configuration,
                    sourceMapper: Option[SourceMapper] = None,
@@ -20,6 +21,7 @@ class ErrorHandler(environment: Environment,
     sourceMapper,
     optionRouter) {
 
+  // Logger class to log the info and error .
   private val logger = org.slf4j.LoggerFactory.getLogger("ErrorHandler")
 
   // This maps through Guice so that the above constructor can call methods.

@@ -1,4 +1,4 @@
-package Rest
+package Util
 
 import javax.inject.Inject
 import play.api.OptionalDevContext

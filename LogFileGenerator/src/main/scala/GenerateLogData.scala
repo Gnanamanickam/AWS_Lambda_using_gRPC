@@ -42,9 +42,11 @@ object GenerateLogData:
     LogMsgSimulator(init(RandomStringGenerator((Parameters.minStringLength, Parameters.maxStringLength), Parameters.randomSeed)), Parameters.maxCount)
   }
 
-
+  // get the bucket name from config file
   val bucketName: String = config.getString("randomLogGenerator.aws_s3.bucketName")
+  // get the s3 file name from config file
   val s3fileName: String = config.getString("randomLogGenerator.aws_s3.s3fileName")
+  // get the local file name from config file
   val localFileName: String = config.getString("randomLogGenerator.aws_s3.localFileName")
 
   val s3: AmazonS3 = AmazonS3ClientBuilder.standard
@@ -52,6 +54,7 @@ object GenerateLogData:
     .withForceGlobalBucketAccessEnabled(true) // If a bucket is in a different region, try again in the correct region
     .build
 
+  // Try to put the object in the s3 bucket
   try s3.putObject(bucketName, s3fileName, new File(localFileName))
   catch {
     case e: AmazonServiceException =>
