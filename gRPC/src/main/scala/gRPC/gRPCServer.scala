@@ -39,10 +39,10 @@ object gRPCServer {
 
 class gRPCServer(executionContext: ExecutionContext) { self =>
 
-  private[this] var server: Server = null
+  val server: Server = ServerBuilder.forPort(gRPCServer.port).addService(GreeterGrpc.bindService(new GreeterImpl, executionContext)).build.start
 
   private def start(): Unit = {
-    server = ServerBuilder.forPort(gRPCServer.port).addService(GreeterGrpc.bindService(new GreeterImpl, executionContext)).build.start
+//    server = ServerBuilder.forPort(gRPCServer.port).addService(GreeterGrpc.bindService(new GreeterImpl, executionContext)).build.start
     // Log message to say server started on the given port
     gRPCServer.logger.info("Server started on " + gRPCServer.port)
     sys.addShutdownHook {
