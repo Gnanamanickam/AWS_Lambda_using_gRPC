@@ -37,7 +37,7 @@ class gRPCTest extends AnyFlatSpec with Matchers {
     val responseAWS = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
     val result = responseAWS.mkString
     val json = result.parseJson.asJsObject
-    val value = json.getFields("isPresent")
+    val value = json.getFields("isTimeStampPresent")
     logger.info(value.toString())
     assert(value != null)
   }

@@ -40,7 +40,7 @@ class restClientControllerSpec extends PlaySpec with GuiceOneAppPerTest with Inj
 //      "Work from a browser" in new WithBrowser {
 //
 //        browser.goTo("http://localhost:9000/logAPI")
-//        browser.pageSource must contain("\"{\\\"isPresent\\\": \\\"True\\\"}\"")
+//        browser.pageSource must contain("\"{\\\"isTimeStampPresent\\\": \\\"True\\\"}\"")
 //      }
 //    }
   }

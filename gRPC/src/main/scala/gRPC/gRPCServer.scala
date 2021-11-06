@@ -2,7 +2,6 @@ package gRPC
 
 import java.util.logging.Logger
 import io.grpc.{Server, ServerBuilder}
-import spray.json._
 
 import java.util.concurrent.TimeUnit
 import java.util.logging.{Level, Logger}
@@ -77,15 +76,11 @@ class gRPCServer(executionContext: ExecutionContext) { self =>
       val inputDifferentialTime = input(1)
 
       //Call Lambda API Gateway to get the response
-      val responseAWS = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
-      // Convert the result to string
-      val result = responseAWS.mkString
-      // Convert the string into json Object
-      val json = result.parseJson.asJsObject
-      // Add the json String to the reply message and send to client
-      val reply = logReply(message = json.fields("isPresent").toString())
+      val APIresponse = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
+      // Add the result to the reply message and send to client
+      val reply = logReply(message = APIresponse.mkString)
       // To close the AWS response
-      responseAWS.close()
+      APIresponse.close()
       Future.successful(reply)
     }
   }
