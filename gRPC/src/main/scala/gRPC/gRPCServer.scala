@@ -72,11 +72,9 @@ class gRPCServer(executionContext: ExecutionContext) { self =>
 
       // Split the input into two to get input Time and Inputdifferential time to pass it separately as query param
       val input = req.name.split(",")
-      val inputTime = input(0)
-      val inputDifferentialTime = input(1)
 
       //Call Lambda API Gateway to get the response
-      val APIresponse = scala.io.Source.fromURL(APIGateway+inputTime+"&inputDifferentialTime="+inputDifferentialTime)
+      val APIresponse = scala.io.Source.fromURL(APIGateway+input(0)+"&inputDifferentialTime="+input(1))
       // Add the result to the reply message and send to client
       val reply = logReply(message = APIresponse.mkString)
       // To close the AWS response
